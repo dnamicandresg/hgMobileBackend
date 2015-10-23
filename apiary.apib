@@ -745,6 +745,27 @@ Get all stores in no particular order
             }
         }
 
+### Delete a store [DELETE /stores/{store_id}]
+
++ Request 
+        
+    + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+            
++ Response 200
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
+
 
 
 ## Orders Collection [/orders]
