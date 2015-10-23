@@ -582,7 +582,7 @@ Delete a credit card from the user's account
             }
         }
         
-### Pay - One time only [POST /users/pay]
+### Pay - One time only [POST /users/pay/once]
 
 Pay with a credit card after entering the card information. Card might not be saved
 
@@ -591,6 +591,62 @@ Pay with a credit card after entering the card information. Card might not be sa
         + Parameters
         
             + stripe_token:     stripe_token_value
+            + amount:           float
+            + currency:         3-letter ISO code
+        
+        + Headers
+        
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
+        
+### Pay - One time only [POST /users/pay/{card_id}]
+
+Pay with a saved credit card by providing the card id
+
++ Request (application/x-www-form-urlencoded)
+    
+        + Parameters
+        
+            + amount:           float
+            + currency:         3-letter ISO code
+        
+        + Headers
+        
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
+        
+### Pay - One time only [POST /users/pay/]
+
+Pay with a default saved credit card by providing the card id
+
++ Request (application/x-www-form-urlencoded)
+    
+        + Parameters
+        
             + amount:           float
             + currency:         3-letter ISO code
         
