@@ -123,6 +123,40 @@ the Database using the provided token.
             }
         }
         
+### Edit current user [PUT /users/]
+
+Edit the current user's information
+
++ Request (application//x-www-form-urlencoded)
+
+    + Parameters
+            + first_name:   "One",
+            + last_name:    "Guy",
+            + gender:       "male",
+            + birthday:     "22/22/2222"
+            
+    + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token> 
+        
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                {
+                    "first_name":   "One",
+                    "last_name":    "Guy",
+                    "gender":       "male",
+                    "birthday":     "22/22/2222"
+                }
+            }
+        }
+        
 ### Create a New User [POST /users]
 
 Create a new User. This endpoint should be called when manually adding
@@ -284,6 +318,10 @@ Change user's password.
             + current_password: password
             + new_password:     new_password
             + new_password_2:   new_password
+        
+        + Headers
+        
+                Authorization: Bearer <the_token / the_jwt_token>
 
 
 + Response 200 (application/json)
@@ -298,6 +336,33 @@ Change user's password.
                 //response to be defined
             }
         }
+        
+### Manage push notifications [POST /users/push]
+
+Enable/Disable push notifications for the current user
+
++ Request (application/x-www-form-urlencoded)
+
+        + Parameters
+        
+            + device_token:             (device token)
+            + os:                       (ios / android)
+            + notification_status:      (1 = enable / 0 = disable )
+
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
+
         
 ### Get credit cards [GET /users/cards]
 
