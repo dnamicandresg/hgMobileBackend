@@ -701,6 +701,50 @@ Get all stores in no particular order
             }
         }
 
+### Edit a store [PUT /stores/{store_id}]
+
++ Request (application/x-www-form-urlencoded)
+
+        + Parameters
+        
+            + place_name:          "16TH STREET PHILADELPHIA, PA"
+            + place_description:   "110 s. 16th st. (btwn sansom + chestnut) philadelphia, pa 19102 | 215 279 7724 hours 11am-10pm daily"
+            + place_image:         "url"
+            + place_latitud:       "40.0402454"
+            + place_longitude:     "-75.365108"
+            + zip_code:            "19103"
+            + google_maps_link:    "https://www.google.com/maps/"place/honeygrow/40.0402454,-75.365108"
+            + waze_link:           "url"
+        
+        + Headers
+        
+            Authorization: Bearer <the_token / the_jwt_token>
+            
++ Response 200
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                [
+                    "place_id": "asdsc34fddgfaa",
+                    "place_name": "16TH STREET PHILADELPHIA, PA",
+                    "place_description": "110 s. 16th st. (btwn sansom + chestnut) philadelphia, pa 19102 | 215 279 7724 hours 11am-10pm daily",
+                    "place_image": "url",
+                    "place_latitud": "40.0402454",
+                    "place_longitude": "-75.365108",
+                    "zip_code": "19103",
+                    "google_maps_link": "https://www.google.com/maps/"place/honeygrow/40.0402454,-75.365108",
+                    "waze_link": "url"
+                ],
+                [],
+                []
+            }
+        }
+
 
 
 ## Orders Collection [/orders]
