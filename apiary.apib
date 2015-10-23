@@ -22,6 +22,34 @@ body: {
 }
 
 
+## OAuth Collection [/oauth]
+
+### Get a new access token [GET /oauth/token]
+
++ Request (application/x-www-form-urlencoded)
+
+        + Parameters
+            + grant_type:       "refresh_token"
+            + refresh_token:    String
+            + client_id:        String
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                auth:{ 
+                
+                    "token":            "ascdasdca234234rascaeq3", 
+                    "refresh_token":    "asdcasdca234ghhret324" 
+                    }
+            }
+        }
+        
 ## Users Collection [/users]
 
 ### List All Users [GET]
