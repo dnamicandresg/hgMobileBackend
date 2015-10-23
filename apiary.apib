@@ -348,6 +348,38 @@ Enable/Disable push notifications for the current user
             + device_token:             (device token)
             + os:                       (ios / android)
             + notification_status:      (1 = enable / 0 = disable )
+        
+        + Headers
+        
+                Authorization: Bearer <the_token / the_jwt_token>
+
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
+        
+### Upload profile picture [POST /users/picture]
+
+Set the url for a newly AWS CDN uploaded picture
+
++ Request (application/x-www-form-urlencoded)
+
+        + Parameters
+        
+            + url:             "(AWS CDN url)"
+        
+        + Headers
+        
+                Authorization: Bearer <the_token / the_jwt_token>
 
 
 + Response 200 (application/json)
