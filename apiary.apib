@@ -511,6 +511,54 @@ endpoint to call Stripe and save the card
             }
         }
         
+### Edit a Credit Card [PUT /users/cards/{card_id}]
+
+Edit a credit card saved in the user's account, 
+
++ Request (application/x-www-form-urlencoded)
+    
+        + Parameters
+        
+            + address_city:     "Detroit",
+            + address_country:  "US",
+            + address_line1:    "123 Fake St",
+            + address_line2:    "Apt 4",
+            + address_state:    "MI",
+            + address_zip:      "48201",
+            + brand:            "Visa",
+            + exp_month:        11,
+            + exp_year:         2018,
+            + last4:            "1881",
+            + name:             "Jane Austen"
+        
+        + Headers
+        
+                Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                "id":               "card_16wdxa2eZvKYlo2CS59N75Un",
+                "address_city":     "Detroit",
+                "address_country":  "US",
+                "address_line1":    "123 Fake St",
+                "address_line2":    "Apt 4",
+                "address_state":    "MI",
+                "address_zip":      "48201",
+                "brand":            "Visa",
+                "exp_month":        11,
+                "exp_year":         2018,
+                "last4":            "1881",
+                "name":             "Jane Austen"
+            }
+        }
+        
 ### Delete a Credit Card [DELETE /users/cards/{card_id}]
 
 Delete a credit card from the user's account
