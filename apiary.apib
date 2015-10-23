@@ -766,6 +766,36 @@ Get all stores in no particular order
             }
         }
 
+## Loyalty Collection [/loyalty]
+
+### Accumulate loyalty points [POST /loyalty]
+
++ Request (application/x-www-form-urlencoded)
+        
+        + Parameters
+        
+            + sourceID:     String  // String ("GAME", "HEALTH" or "SHOPPING")
+            + amount:       float   //(0 if nothing) (CALORIES, GAMING POINTS or MONEY)
+            + options:      String  //(extra parameters if required)
+            
+        + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                accumulated_points: 00, //converted (to HG loyalty points)
+                new_balance:        00  //total HG points
+
+            }
+        }
 
 
 ## Orders Collection [/orders]
