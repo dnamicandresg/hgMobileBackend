@@ -670,6 +670,39 @@ Pay with a default saved credit card by providing the card id
 
 
 
+## Stores Collection [/stores]
+
+### Get all Stores [GET]
+
+Get all stores in no particular order
+
++ Response 200
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                [
+                    "place_id": "asdsc34fddgfaa",
+                    "place_name": "16TH STREET PHILADELPHIA, PA",
+                    "place_description": "110 s. 16th st. (btwn sansom + chestnut) philadelphia, pa 19102 | 215 279 7724 hours 11am-10pm daily",
+                    "place_image": "url",
+                    "place_latitud": "40.0402454",
+                    "place_longitude": "-75.365108",
+                    "zip_code": "19103",
+                    "google_maps_link": "https://www.google.com/maps/"place/honeygrow/40.0402454,-75.365108",
+                    "waze_link": "url"
+                ],
+                [],
+                []
+            }
+        }
+
+
+
 ## Orders Collection [/orders]
 
 ### Place an order [POST /orders]
