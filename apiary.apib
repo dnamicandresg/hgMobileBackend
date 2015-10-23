@@ -1,80 +1,449 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://api.honeygrow.com/
 
-# hgMobileBackend
+# Honeygrow
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Honeygrow's API mockup
 
-## Questions Collection [/questions]
+#Error Handling
 
-### List All Questions [GET]
+The errors will be handled the same way for ALL responses.
+
+Each response should comply with the following scheme:
+
+body: {
+
+        result:{
+        
+                error_code: [ success, error_1, error_2, error_n ],
+                
+                message: "Descriptive NON TECHNICAL message" //for developer usage
+        }
+}
+
+
+## Users Collection [/users]
+
+### List All Users [GET]
 
 + Response 200 (application/json)
 
-        [
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
             {
-                "question": "Change Test",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                [
                     {
-                        "choice": "ANDRES",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
+                        "first_name": "John",
+                        "last_name": "Doe",
+                        "email": "johndoe@somedomain.com"
+                        "password": "123456",
+                        "gender":"male",
+                        "birthday":"00/00/0000"
+                    },
+                    {
+                        "first_name": "Jane",
+                        "last_name": "Doe",
+                        "email": "janedoe@somedomain.com"
+                        "password": "1234567",
+                        "gender":"female",
+                        "birthday":"11/11/1111"
+                    },
+                    {
+                        "first_name": "Some",
+                        "last_name": "Body",
+                        "email": "somebody@somedomain.com"
+                        "password": "12345678",
+                        "gender":"",
+                        "birthday":""
                     }
                 ]
             }
-        ]
+        }
+        
+### Retrieve current user [GET /users/me]
 
-### Create a New Question [POST]
+The user will be retrieved using the token. That means that the user will be found in
+the Database using the provided token.
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token> 
+        
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                {
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "email": "johndoe@somedomain.com"
+                    "password": "123456",
+                    "gender":"male",
+                    "birthday":"00/00/0000"
+                }
+            }
+        }
+        
+### Create a New User [POST /users/create]
+
+Create a new User. This endpoint should be called when manually adding
+user information (i.e. no Facebook signup)
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "first_name": "One",
+            "last_name": "Guy",
+            "email": "oneguy@somedomain.com"
+            "password": "123456789",
+            "gender":"male",
+            "birthday":"22/22/2222"
         }
 
 + Response 201 (application/json)
 
     + Headers
 
-            Location: /questions/2
+            Location: /users/{user_id}
 
     + Body
-
+    
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                result:{
+                    error_code: 1234,
+                    message: "Error/Success message here"
+                },
+                response:
+                {
+                    "first_name": "One",
+                    "last_name": "Guy",
+                    "email": "oneguy@somedomain.com"
+                    "password": "123456789",
+                    "gender":"male",
+                    "birthday":"22/22/2222"
+                }
+            }
+
+      
+### Login a User manually using username/password[POST /users/login/]
+
+ogin a User manually using username/password. This endpoint should be called when
+manually sign in (i.e. no Facebook signup)
+
++ Request (application/x-www-form-urlencoded)
+
+        username=<some username>
+        password=<the_password>
+
++ Response 201 (application/json)
+
+    + Body
+    
+            {
+                result:{
+                    error_code: 1234,
+                    message: "Error/Success message here"
+                },
+                response:
+                {
+                    "first_name": "One",
+                    "last_name": "Guy",
+                    "email": "oneguy@somedomain.com"
+                    "password": "123456789",
+                    "gender":"male",
+                    "birthday":"22/22/2222"
+                }
+            }
+            
+### Login a User via Facebook [POST /users/login/facebook]
+
+Login or create a new User via Facebook. Endpoint requires FacebookId 
+(should be Facebook token retrieved from device's Facebook login instead, and 
+then query from our server using passport-facebook-token to retrieve the
+user's info)
+
++ Request (application/x-www-form-urlencoded)
+
+        facebook_token=<the_token_sfasgghfgjtetwerfafbdsgnhsga>
+
++ Response 201 (application/json)
+
+    + Body
+    
+            {
+                result: 
+                {
+                    error_code: 1234,
+                    message: "Error/Success message here"
+                },
+                response:
+                {
+                    tokens:{
+                        "token":"",
+                        "refresh_token":""
+                    },
+                    "first_name": "Another",
+                    "last_name": "Guy",
+                    "email": "anotherguy@somedomain.com"
+                    "profile_picture": "https://facebooks_picture_url",
+                    "gender":"male",
+                    "birthday":"33/33/3333"
+                }
+            }
+            
+### Confirm email address [GET /users/confirm_email/{token}]
+
+After creating an account, the user must confirm his email address by clicking on a 
+provided email that should look like this endpoint
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
+        
+### Password reset [POST /users/reset_password]
+
+Reset your password when lost. This endpoint will send a temporary password for 
+the user to use so he can reset his lost password. This temporary password will be
+sent to the user's SAVED EMAIL(not the one provided). The provided email should 
+match the saved one.
+
++ Request (application/x-www-form-urlencoded)
+
+        email_address: users_email@somedomain.com
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
+        
+### Change password [POST /users/change_password]
+
+Change user's password. 
+
++ Request (application/x-www-form-urlencoded)
+
+        + Parameters
+        
+            + email_address:    users_email@somedomain.com
+            + current_password: password
+            + new_password:     new_password
+            + new_password_2:   new_password
+
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
+        
+### Get credit cards [GET /users/cards]
+
+Retrieves all the credit cards the user has saved in his account
+
++ Request
+        
+    + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                [
                     {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+                        "id":               "card_16wdxa2eZvKYlo2CS59N75Un",
+                        "address_city":     "Detroit",
+                        "address_country":  "US",
+                        "address_line1":    "123 Fake St",
+                        "address_line2":    "Apt 4",
+                        "address_state":    "MI",
+                        "address_zip":      "48201",
+                        "brand":            "Visa",
+                        "exp_month":        11,
+                        "exp_year":         2018,
+                        "last4":            "1881",
+                        "name":             "Jane Austen"
+                    },
+                    {
+                        "id":               "card_16wdxa2eZvKYlo2CS59N75Un",
+                        "address_city":     "Detroit",
+                        "address_country":  "US",
+                        "address_line1":    "123 Fake St",
+                        "address_line2":    "Apt 4",
+                        "address_state":    "MI",
+                        "address_zip":      "48201",
+                        "brand":            "Visa",
+                        "exp_month":        11,
+                        "exp_year":         2018,
+                        "last4":            "1881",
+                        "name":             "Jane Austen"
                     }
                 ]
             }
+        }
+        
+### Get a Credit Card [GET /users/cards/{card_id}]
+
+Get a credit card from the user's account
+
++ Request 
+        
+    + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                "id":               "card_16wdxa2eZvKYlo2CS59N75Un",
+                "address_city":     "Detroit",
+                "address_country":  "US",
+                "address_line1":    "123 Fake St",
+                "address_line2":    "Apt 4",
+                "address_state":    "MI",
+                "address_zip":      "48201",
+                "brand":            "Visa",
+                "exp_month":        11,
+                "exp_year":         2018,
+                "last4":            "1881",
+                "name":             "Jane Austen"
+            }
+        }
+        
+### Add a Credit Card [POST /users/cards/add]
+
+Add a credit card to the user's account, once in has been verified by Stripe's 
+servers. The token retrieved by Stripe is the parameter that shall be sent to this 
+endpoint to call Stripe and save the card
+
++ Request (application/x-www-form-urlencoded)
+    
+        + Parameters
+        
+            + stripe_token:     stripe_token_value
+        
+        + Headers
+        
+                Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                card_id: "server generated card id"
+            }
+        }
+        
+### Delete a Credit Card [DELETE /users/cards/{card_id}]
+
+Delete a credit card from the user's account
+
++ Request (application/x-www-form-urlencoded)
+        
+    + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
+
+
+
+
+## Orders Collection [/orders]
+
+### Place an order [POST /orders]
+
++ Request
+        
+        + Parameters
+        
+            + items:                Array
+            + subtotal:             Number
+            + promo_code_discount:  Number
+            + loyalty_discount:     Number
+            + taxes:                Number
+            + total:                Number
+            + promo_code:           String
+            + loyalty_redeem:       Int
+            + payment_method:       String
+            + credit_card_token:    String
+            
+        + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
