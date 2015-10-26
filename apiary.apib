@@ -668,6 +668,35 @@ Pay with a default saved credit card by providing the card id
         }
 
 
+## Customers Collection [/customers]
+        
+### Send Push Notification [POST /customers/pushNotifications/send]
+
++ Request (application/x-www-form-urlencoded)
+    
+        + Parameters
+        
+            + checked_in_time   Date
+            + os                String ("iphone/android")
+            + enabled           int (0 = disable / 1 = enable)
+            + user_id           String
+        
+        + Headers
+        
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                //response to be defined
+            }
+        }
 
 
 ## Stores Collection [/stores]
