@@ -797,6 +797,34 @@ Get all stores in no particular order
             }
         }
 
+### Convert Loyalty to Money [POST /loyalty/toMoney]
+
++ Request (application/x-www-form-urlencoded)
+        
+        + Parameters
+        
+            + amount:       float   //(loyalty points to convert)
+            + currency:     String  //String representing currency to convert to //(USD,CRC,YEN etc)
+            
+        + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                amount: 00,         //converted (to desired currency)
+                currency_code: USD  //total HG points
+
+            }
+        }
+
 
 ## Orders Collection [/orders]
 
