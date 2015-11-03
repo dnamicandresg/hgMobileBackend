@@ -92,19 +92,18 @@ body: {
             }
         }
         
-### Retrieve current user [GET /users/me]
+### Retrieve current user [GET /users/me{?userParams}]
 
 The user will be retrieved using the token. That means that the user will be found in
 the Database using the provided token.
+
+userParams:       optional parameters, it will retrieve the parameters declared in the userParams, if there is not userParam it will retrieve the basic user info.
 
 + Request (application/json)
 
     + Headers
     
             Authorization: Bearer <the_token / the_jwt_token> 
-            
-    + Parameters
-            + userParams:       optional parameters, it will retrieve the parameters declared in the userParams, if there is not userParam it will retrieve the basic user info.
             
         
 + Response 200 (application/json)
