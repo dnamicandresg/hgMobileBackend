@@ -505,14 +505,33 @@ endpoint to call Stripe and save the card
 + Response 200 (application/json)
 
         {
-            result:{
-                error_code: 1234,
-                message: "Error/Success message here"
-            },
-            response:
-            {
-                card_id: "server generated card id"
-            }
+            "errors": null,
+            "response": {
+                "id": "card_173CYyEu2elTBFRo8Ur6mxSJ",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "American Express",
+                "country": "US",
+                "customer": "cus_7HkRLvSe4Zy0MJ",
+                "cvc_check": "pass",
+                "dynamic_last4": null,
+                "exp_month": 9,
+                "exp_year": 2019,
+                "fingerprint": "9AJHoinJw2ptr5lO",
+                "funding": "credit",
+                "last4": "8431",
+                "metadata": {},
+                "name": null,
+                "tokenization_method": null
+              },
+             "message": "Card Saved"
         }
         
 ### Edit a Credit Card [PUT /users/cards/{card_id}]
