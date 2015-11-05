@@ -877,17 +877,21 @@ Get all stores in no particular order
 + Request
         
         + Parameters
-        
+            + userId                Temporally while OAuth is disabled
             + items:                Array
             + subtotal:             Number
             + promo_code_discount:  Number
-            + loyalty_discount:     Number
+            + loyaltyDiscount:      Number
             + taxes:                Number
             + total:                Number
             + promo_code:           String
-            + loyalty_redeem:       Int
-            + payment_method:       String
-            + credit_card_token:    String
+            + loyaltyRedeem:        Int
+            + customerId            String Stripe customer id
+            + amount                Int amount to charge
+            + currency              String currency to charge according to ISO, probably just usd
+            + description           Description of the charge to be saved in Stripe
+            + source                Card token from stripe
+            
             
         + Headers
     
