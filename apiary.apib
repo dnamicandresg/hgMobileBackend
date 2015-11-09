@@ -817,10 +817,13 @@ Get all stores in no particular order
 + Request (application/x-www-form-urlencoded)
         
         + Parameters
-        
-            + sourceID:     String  // String ("GAME", "HEALTH" or "SHOPPING")
-            + amount:       float   //(0 if nothing) (CALORIES, GAMING POINTS or MONEY)
-            + options:      String  //(extra parameters if required)
+            + userId        :   String  // Userid in the database
+            + sourceId      :   String  // String ("GAME", "HEALTH" or "SHOPPING")
+            + sourceAmount  :   Number  // The number of points of the specific source ex 100 Game points
+            + points        :   Number  // The loyalty points to increment
+            + balanceBefore :   Number  // The balance before the increment
+            + balanceAfter  :   Number  // The balance after the increment
+            + place         :   String  // Place of the incremente ex iOS Device, Specific Rest 
             
         + Headers
     
