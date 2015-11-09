@@ -812,6 +812,27 @@ Get all stores in no particular order
 
 ## Loyalty Collection [/loyalty]
 
+### Add loyalty source
+
++ Request (application/x-www-form-urlencoded)
+        
+        + Parameters
+            + description   :   String  // Description of the source
+        + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+        {
+          "errors": null,
+          "response": {
+            "__v": 0,
+            "description": "Otro",
+            "_id": "56411833b1a526396fe97cfb"
+          },
+          "message": "Loyalty Source successfully saved"
+        }
+
 ### Accumulate loyalty points [POST /loyalty]
 
 + Request (application/x-www-form-urlencoded)
