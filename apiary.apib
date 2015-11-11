@@ -861,6 +861,29 @@ Get all stores in no particular order
           "message": "Loyalty Level successfully updated"
         }
         
+### Delete loyalty level [DELETE /loyalty/level]
+
++ Request (application/x-www-form-urlencoded)
+        
+        + Parameters
+            + levelId   :   String  // id of level
+        + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+          "errors": null,
+          "response": {
+            "_id": "5643b7c95ea84aae521e04a2",
+            "name": "Blue",
+            "points": 100,
+            "__v": 0
+          },
+          "message": "Loyalty Level successfully deleted"
+        }
+        
 ### Add loyalty source [POST /loyalty/source]
 
 + Request (application/x-www-form-urlencoded)
