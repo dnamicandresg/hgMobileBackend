@@ -966,7 +966,60 @@ Get all stores in no particular order
             }
         }
 
+### Get loyalty history [GET /loyalty/history/{userId}{?fromDate,toDate}]
 
++ Request
+        
+        
+    + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+          "errors": null,
+          "response": [
+            {
+              "_id": "564ba82dc1e9a628578e5c3d",
+              "userId": "564b8593762bb6c83226a5f2",
+              "description": "Stir-Fry",
+              "place": "Honeygrow Phili",
+              "points": 10,
+              "balanceBefore": 350,
+              "balanceAfter": 360,
+              "increment": true,
+              "isIncrement": true,
+              "registeredAt": "2015-11-17T22:20:29.951Z"
+            },
+            {
+              "_id": "564ba82dc1e9a628578e5c3e",
+              "userId": "564b8593762bb6c83226a5f2",
+              "description": "HoneyBar",
+              "place": "Honeygrow Phili",
+              "points": 50,
+              "balanceBefore": 360,
+              "balanceAfter": 310,
+              "increment": false,
+              "isIncrement": true,
+              "registeredAt": "2015-11-17T22:20:29.952Z"
+            },
+            {
+              "_id": "564ba82dc1e9a628578e5c3f",
+              "userId": "564b8593762bb6c83226a5f2",
+              "description": "Salad",
+              "place": "Honeygrow Phili",
+              "points": 100,
+              "balanceBefore": 310,
+              "balanceAfter": 210,
+              "increment": false,
+              "isIncrement": true,
+              "registeredAt": "2015-11-17T22:20:29.952Z"
+            }
+          ],
+          "message": "Loyalty History successfully requested"
+        }
+        
 ## Orders Collection [/orders]
 
 ### Place an order [POST /orders]
