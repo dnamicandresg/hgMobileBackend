@@ -1145,3 +1145,71 @@ Get all stores in no particular order
           ],
           "message": "Loyalty History successfully requested"
         }
+        
+### Get favorite orders  [GET /order/favorites/{userId}]
+
++ Request
+        
+        
+    + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+          "errors": null,
+          "response": [
+            {
+              "_id": "564e443e23b9dae759b09d80",
+              "userId": "564b8593762bb6c83226a5f2",
+              "total": 60,
+              "taxes": 1.5,
+              "subTotal": 5,
+              "__v": 0,
+              "dateCreated": "2015-11-19T21:50:54.991Z",
+              "items": [
+                {
+                  "id": "PLU02",
+                  "category": "Stir-Fry",
+                  "rewardPoints": 10,
+                  "isRedeemed": false,
+                  "redeemPoints": 50
+                },
+                {
+                  "id": "PLU02",
+                  "category": "Stir-Fry",
+                  "rewardPoints": 10,
+                  "isRedeemed": false,
+                  "redeemPoints": 50
+                }
+              ]
+            },
+            {
+              "_id": "564e447f5961822f5abd6b4e",
+              "userId": "564b8593762bb6c83226a5f2",
+              "total": 60,
+              "taxes": 1.5,
+              "subTotal": 5,
+              "__v": 0,
+              "dateCreated": "2015-11-19T21:51:59.388Z",
+              "items": [
+                {
+                  "id": "PLU02",
+                  "category": "Stir-Fry",
+                  "rewardPoints": 10,
+                  "isRedeemed": false,
+                  "redeemPoints": 50
+                },
+                {
+                  "id": "PLU02",
+                  "category": "Stir-Fry",
+                  "rewardPoints": 10,
+                  "isRedeemed": false,
+                  "redeemPoints": 50
+                }
+              ]
+            }
+          ],
+          "message": "Favorite Orders successfully requested"
+        }
