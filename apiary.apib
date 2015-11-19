@@ -1008,3 +1008,27 @@ Get all stores in no particular order
 
             }
         }
+
+### Get orders history [GET /order/history{?fromDate,toDate}]
+
++ Request
+        
+        
+    + Headers
+    
+            Authorization: Bearer <the_token / the_jwt_token>
+
++ Response 200 (application/json)
+
+        {
+            result:{
+                error_code: 1234,
+                message: "Error/Success message here"
+            },
+            response:
+            {
+                "transaction_id":   "adca2341234asd",// (mongodb id)
+                "order_id":         "12345"// (POS order_id)
+
+            }
+        }
